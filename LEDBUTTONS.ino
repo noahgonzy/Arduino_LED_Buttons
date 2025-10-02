@@ -1,11 +1,16 @@
 
 // Define Pins
-#define BLUE 3
-#define GREEN 5
-#define RED 6
+#define BLUE 2
+#define GREEN 4
+#define RED 7
 #define REDBUTTON 9
 #define GREENBUTTON 10
 #define BLUEBUTTON 11
+
+//define global vars
+bool g = false;
+bool r = false;
+bool b = false;
 
 void setup()
 {
@@ -26,37 +31,35 @@ digitalWrite(LED_BUILTIN, LOW);
 
 // main loop
 void loop(){
+  g = false;
+  r = false;
+  b = false;
   if(digitalRead(REDBUTTON) == LOW){
-    digitalWrite(RED, HIGH);
-    digitalWrite(GREEN, LOW);
-    digitalWrite(BLUE, LOW);
+    r = true;
   }
   if(digitalRead(GREENBUTTON) == LOW){
-    digitalWrite(RED, LOW);
-    digitalWrite(GREEN, HIGH);
-    digitalWrite(BLUE, LOW);
+    g = true;
   }
   if(digitalRead(BLUEBUTTON) == LOW){
+    b = true;
+  }
+  
+  if(r){
+    digitalWrite(RED, HIGH);
+  }
+  else{
     digitalWrite(RED, LOW);
+  }
+  if(g){
+    digitalWrite(GREEN, HIGH);
+  }
+  else{
     digitalWrite(GREEN, LOW);
+  }
+  if(b){
     digitalWrite(BLUE, HIGH);
   }
-
-
-  /*
-  for(int i = 0; i < 255; i += 1){
-    greenValue += 1;
-    analogWrite(GREEN, greenValue);
-    delay(delayTime);
+  else{
+    digitalWrite(BLUE, LOW);
   }
-
-  for(int i = 0; i < 255; i += 1) // fades out green bring blue full when i=255
-  {
-    greenValue -= 1;
-    blueValue += 1;
-    analogWrite(GREEN, greenValue);
-    analogWrite(BLUE, blueValue);
-    delay(delayTime);
-    }
-  */
 }
